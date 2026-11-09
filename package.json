@@ -1,11 +1,16 @@
 {
   "name": "@xpayr/extension-kit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Crypto-native licensing for browser extensions. The license is the paying wallet — no email, no license keys, no chargebacks.",
   "main": "src/index.js",
   "module": "src/index.js",
   "types": "src/index.d.ts",
-  "files": ["src", "README.md", "LICENSE", "TRADEMARKS.md"],
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE",
+    "TRADEMARKS.md"
+  ],
   "scripts": {
     "test": "node test/kit.test.js"
   },
@@ -17,7 +22,17 @@
     "crypto",
     "stablecoin",
     "manifest-v3",
-    "extensionpay-alternative"
+    "extensionpay-alternative",
+    "xpayr",
+    "crypto-payment-gateway",
+    "non-custodial",
+    "usdt",
+    "usdc",
+    "mcp-server",
+    "web3-checkout",
+    "tron",
+    "solana",
+    "circle-arc"
   ],
   "author": "XPayr",
   "license": "MIT",
