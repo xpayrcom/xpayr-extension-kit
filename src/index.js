@@ -97,6 +97,9 @@ function XPayrKit(productCode, options) {
   options = options || {};
   this.productCode = productCode;
   this.baseUrl = (options.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, '');
+  if (!/^https:\/\//.test(this.baseUrl) && !/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(this.baseUrl)) {
+    throw new Error('XPayrKit baseUrl must use https://');
+  }
   this.apiUrl = this.baseUrl + '/api/v1/index.php';
   this.debug = !!options.debug;
   this._keyPromise = null;
@@ -390,8 +393,10 @@ XPayrKit.prototype.startBackground = function () {
 
   if (api.runtime.onMessageExternal) {
     api.runtime.onMessageExternal.addListener(function (message, sender, sendResponse) {
-      var origin = sender && sender.url ? sender.url : '';
-      if (origin.indexOf(self.baseUrl) !== 0) return;
+      // Exact origin match: a prefix check would also accept e.g. https://xpayr.com.attacker.example
+      var origin = '';
+      try { origin = new URL(sender && sender.url ? sender.url : '').origin; } catch (e) { return; }
+      if (origin !== new URL(self.baseUrl).origin) return;
       if (!message || message.type !== 'xpayr:license' || !message.token) return;
       self._applyToken(message.token, message.user, 'network').then(function (user) {
         if (typeof sendResponse === 'function') sendResponse({ ok: !!user.licensed });

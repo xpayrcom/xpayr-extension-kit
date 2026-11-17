@@ -1,6 +1,6 @@
 {
   "name": "@xpayr/extension-kit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Crypto-native licensing for browser extensions. The license is the paying wallet — no email, no license keys, no chargebacks.",
   "main": "src/index.js",
   "module": "src/index.js",
