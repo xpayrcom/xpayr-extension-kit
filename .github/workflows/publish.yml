@@ -19,7 +19,7 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
       - name: Use an npm CLI that supports trusted publishing (OIDC)
-        run: npm install -g npm@^11.5.1
+        run: npm install -g npm@latest
       - run: npm test
-      - name: Publish with npm trusted publishing
-        run: npm publish --access public --provenance
+      - name: Stage with npm trusted publishing (a maintainer approves with 2FA)
+        run: npm stage publish --access public --provenance
